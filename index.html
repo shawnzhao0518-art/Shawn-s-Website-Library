@@ -47,11 +47,8 @@
     .site-item a{font-weight:600;color:var(--accent);text-decoration:none;font-size:1rem}
     .site-desc{color:var(--muted);margin:0.3rem 0;font-size:0.95rem}
 
-    /* 手机端适配 */
-    @media (max-width: 820px) {
-      header { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
-      header .controls { width: 100%; justify-content: space-between; }
-      #container { flex-direction: column; }
+    /* 平板 & 手机适配 */
+    @media (max-width: 1024px) {
       #sidebar {
         position: fixed;
         top: 3.5rem;
@@ -67,9 +64,6 @@
       }
       #sidebar.show { transform: translateX(0); }
       #main { flex: 1; padding: 0.8rem; }
-      section.card { padding: 0.8rem; }
-      .site-item a { font-size: 0.9rem; }
-      .site-desc { font-size: 0.8rem; }
     }
 
     a { word-break: break-word; }
@@ -93,22 +87,29 @@
     <main id="main"><div id="content"></div></main>
   </div>
 
+  <!-- 密码弹窗 -->
   <div id="passwordOverlay" class="overlay" style="display:none" aria-hidden="false">
     <div class="modal">
-      <h2>请输入访问密码</h2>
-      <p>为保护此站内容，请输入密码以继续访问。</p>
+      <div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 id="pwdTitle">请输入访问密码</h2>
+        <div class="lang-switch">
+          <button id="pwdBtnZh" class="lang-btn">中文</button>
+          <button id="pwdBtnEn" class="lang-btn">English</button>
+        </div>
+      </div>
+      <p id="pwdDesc">为保护此站内容，请输入密码以继续访问。</p>
       <div class="row">
         <input id="pwdInput" type="password" placeholder="输入密码" />
         <button id="pwdSubmit" class="btn">提交</button>
       </div>
       <div class="error" id="pwdError"></div>
-      <div class="small">（提示：页面会记住解锁状态。点击 Lock 按钮可重新上锁。）</div>
+      <div class="small" id="pwdHint">（提示：页面会记住解锁状态。点击 Lock 按钮可重新上锁。）</div>
     </div>
   </div>
 
   <script>
     /*********************************************************
-     * 六大板块数据（完整）
+     * 六大板块数据
      *********************************************************/
     const data = {
       "categories": [
@@ -160,6 +161,26 @@
       ]
     };
 
+    /* 多语言字典：密码弹窗 */
+    const pwdTexts = {
+      zh: {
+        title: "请输入访问密码",
+        desc: "为保护此站内容，请输入密码以继续访问。",
+        submit: "提交",
+        hint: "（提示：页面会记住解锁状态。点击 Lock 按钮可重新上锁。）",
+        empty: "请输入密码。",
+        wrong: "密码错误，请重试。"
+      },
+      en: {
+        title: "Enter Access Password",
+        desc: "To protect this site, please enter the password to continue.",
+        submit: "Submit",
+        hint: "(Hint: The page remembers unlock state. Click Lock to re-lock.)",
+        empty: "Please enter a password.",
+        wrong: "Incorrect password, try again."
+      }
+    };
+
     const STORED_HASH_HEX = "d303549d060022e41b62cef071b46e7c1745ce5bb224c7667acfacdf8becac8e"; // 910729
     const STORAGE_KEY = "shawn_site_unlocked_v1";
 
@@ -167,6 +188,9 @@
     const pwdInput = document.getElementById("pwdInput");
     const pwdSubmit = document.getElementById("pwdSubmit");
     const pwdError = document.getElementById("pwdError");
+    const pwdTitle = document.getElementById("pwdTitle");
+    const pwdDesc = document.getElementById("pwdDesc");
+    const pwdHint = document.getElementById("pwdHint");
     const lockBtn = document.getElementById("lockBtn");
     const toggleBtn = document.getElementById("toggleBtn");
     const sidebar = document.getElementById("sidebar");
@@ -175,6 +199,8 @@
     const pageTitle = document.getElementById("pageTitle");
     const btnZh = document.getElementById("btnZh");
     const btnEn = document.getElementById("btnEn");
+    const pwdBtnZh = document.getElementById("pwdBtnZh");
+    const pwdBtnEn = document.getElementById("pwdBtnEn");
 
     let currentLang = "en";
 
@@ -209,19 +235,32 @@
       });
     }
 
+    function updatePwdTexts() {
+      const t = pwdTexts[currentLang];
+      pwdTitle.textContent = t.title;
+      pwdDesc.textContent = t.desc;
+      pwdSubmit.textContent = t.submit;
+      pwdHint.textContent = t.hint;
+    }
+
     function setLang(lang){
       currentLang = lang;
       localStorage.setItem("site_lang", lang);
       btnZh.classList.toggle("active", lang==="zh");
       btnEn.classList.toggle("active", lang==="en");
+      pwdBtnZh.classList.toggle("active", lang==="zh");
+      pwdBtnEn.classList.toggle("active", lang==="en");
       pageTitle.textContent = lang==="zh"
         ? "Shawn's Website Library · 赵涵绍的网站库"
         : "Shawn's Website Library";
       buildUI();
+      updatePwdTexts();
     }
 
     btnZh.addEventListener("click", ()=> setLang("zh"));
     btnEn.addEventListener("click", ()=> setLang("en"));
+    pwdBtnZh.addEventListener("click", ()=> setLang("zh"));
+    pwdBtnEn.addEventListener("click", ()=> setLang("en"));
 
     async function sha256Hex(str){
       const enc = new TextEncoder().encode(String(str));
@@ -235,10 +274,10 @@
 
     async function tryUnlockWithInput(){
       const v = pwdInput.value.trim();
-      if(!v){ pwdError.textContent="请输入密码。"; return; }
+      if(!v){ pwdError.textContent=pwdTexts[currentLang].empty; return; }
       const h = await sha256Hex(v);
       if(h===STORED_HASH_HEX){ localStorage.setItem(STORAGE_KEY,"true"); hideOverlay(); }
-      else { pwdError.textContent="密码错误，请重试。"; }
+      else { pwdError.textContent=pwdTexts[currentLang].wrong; }
     }
     pwdSubmit.addEventListener("click", tryUnlockWithInput);
     pwdInput.addEventListener("keydown",(e)=>{ if(e.key==="Enter") tryUnlockWithInput(); });
@@ -246,11 +285,3 @@
     function init(){
       toggleBtn.addEventListener("click",()=>{ sidebar.classList.toggle("show"); });
       lockBtn.addEventListener("click",()=>{ localStorage.removeItem(STORAGE_KEY); showOverlay(); });
-      const savedLang = localStorage.getItem("site_lang") || "en";
-      setLang(savedLang);
-      if(localStorage.getItem(STORAGE_KEY)==="true"){ hideOverlay(); } else { showOverlay(); }
-    }
-    init();
-  </script>
-</body>
-</html>
