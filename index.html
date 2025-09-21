@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shawn's Website Library</title>
+
+  <style>
+    body { margin:0; font-family: system-ui; background:#111; color:#eee; }
+    header { padding:1rem; background:#222; display:flex; justify-content:space-between; }
+    h1 { margin:0; font-size:1.2rem; }
+    #search { padding:.4rem; border-radius:6px; border:none; }
+    section { margin:1rem; padding:1rem; background:#1b1b1b; border-radius:8px; }
+    .item { padding:.5rem 0; border-bottom:1px solid #333; }
+    .item:last-child { border:none; }
+    a { color:#4da3ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .tag { font-size:.8rem; margin-left:.4rem; color:#aaa; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Shawn's Website Library</h1>
+    <input id="search" type="search" placeholder="Search…" />
+  </header>
+
+  <main id="content"></main>
+
+  <script>
+    // ★ 在这里填充你的数据
+    const data = {
+      "categories": [
+        {
+          "title": "Tools",
+          "items": [
+            {
+              "title": "Photopea",
+              "url": "https://www.photopea.com/",
+              "desc": "Online image editor, works like Photoshop in the browser.",
+              "tags": ["image","edit"]
+            }
+          ]
+        },
+        {
+          "title": "Learning",
+          "items": [
+            {
+              "title": "Khan Academy",
+              "url": "https://www.khanacademy.org/",
+              "desc": "Free courses on math, science, programming and more.",
+              "tags": ["education","course"]
+            }
+          ]
+        }
+      ]
+    };
+
+    const content = document.getElementById("content");
+    const searchInput = document.getElementById("search");
+
+    function render(q="") {
+      content.innerHTML = "";
+      data.categories.forEach(cat => {
+        const section = document.createElement("section");
+        const h2 = document.createElement("h2");
+        h2.textContent = cat.title;
+        section.appendChild(h2);
+
+        cat.items
+          .filter(item =>
+            !q ||
+            item.title.toLowerCase().includes(q) ||
+            item.desc.toLowerCase().includes(q) ||
+            (item.tags||[]).some(t => t.toLowerCase().includes(q))
+          )
+          .forEach(item => {
+            const div = document.createElement("div");
+            div.className = "item";
+            div.innerHTML = `
+              <a href="${item.url}" target="_blank">${item.title}</a>
+              <span class="tag">${(item.tags||[]).map(t=>"#"+t).join(" ")}</span>
+              <p>${item.desc||""}</p>
+            `;
+            section.appendChild(div);
+          });
+
+        content.appendChild(section);
+      });
+    }
+
+    searchInput.addEventListener("input", e => {
+      render(e.target.value.toLowerCase());
+    });
+
+    render();
+  </script>
+</body>
+</html>
