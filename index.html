@@ -111,7 +111,7 @@
 
   <script>
     /*********************************************************
-     * 六大板块数据
+     * 六大板块数据（保持完整）
      *********************************************************/
     const data = {
       "categories": [
@@ -242,7 +242,7 @@
       const v = pwdInput.value.trim();
       if(!v){ pwdError.textContent="请输入密码。"; return; }
       const h = await sha256Hex(v);
-      if(h===STORED_HASH_HEX){ localStorage.setItem(STORAGE_KEY,"true"); hideOverlay(); buildUI(); }
+      if(h===STORED_HASH_HEX){ localStorage.setItem(STORAGE_KEY,"true"); hideOverlay(); }
       else { pwdError.textContent="密码错误，请重试。"; }
     }
     pwdSubmit.addEventListener("click", tryUnlockWithInput);
@@ -259,4 +259,7 @@
       });
 
       lockBtn.addEventListener("click",()=>{ localStorage.removeItem(STORAGE_KEY); showOverlay(); });
-      const savedLang = localStorage.getItem("site_lang") ||
+      const savedLang = localStorage.getItem("site_lang") || "en";
+      setLang(savedLang);
+
+      // ✅ 在小屏幕默认隐藏 sidebar
