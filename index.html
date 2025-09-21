@@ -61,7 +61,7 @@
     <button id="toggleBtn" class="btn" aria-label="Toggle sidebar">☰</button>
     <h1>Shawn's Website Library · 赵涵绍的网站库</h1>
     <div class="controls">
-      <!-- 新增语言切换 -->
+      <!-- 新增语言切换按钮 -->
       <div id="langSwitch">
         <button id="btnZh" class="lang-btn active">中文</button>
         <button id="btnEn" class="lang-btn">English</button>
@@ -94,7 +94,79 @@
   </div>
 
   <script>
-    const data = { "categories": [ /* 你原来的 data 保持不变 */ ] };
+    /*********************************************************
+     * 中英文数据
+     *********************************************************/
+    const translations = {
+      zh: {
+        title: "Shawn's Website Library · 赵涵绍的网站库",
+        categories: [
+          { title: "常用工具", items: [
+            { title: "ScanQR", url: "https://scanqr.org", desc: "在线二维码生成和扫描工具" },
+            { title: "Z-Library", url: "https://z-library.sk", desc: "电子书下载网站" },
+            { title: "FreeCompress", url: "https://freecompress.com", desc: "文件压缩工具" },
+            { title: "Documentary Heaven", url: "https://www.documentaryheaven.com", desc: "在线观看纪录片" },
+            { title: "Convertio", url: "https://convertio.co", desc: "文件格式转换工具" }
+          ]},
+          { title: "剪辑 / 音乐", items: [
+            { title: "ScanQR", url: "https://scanqr.org", desc: "在线二维码生成和扫描工具" },
+            { title: "SaveFrom.net", url: "https://zh.savefrom.net", desc: "免费视频和音乐下载工具" },
+            { title: "Free Music Archive", url: "https://freemusicarchive.org", desc: "免费、可合法下载的音乐资源库" },
+            { title: "Pixabay Music", url: "https://pixabay.com/music/", desc: "免版权音乐下载" }
+          ]},
+          { title: "学习", items: [
+            { title: "Alpha One 学习挑战", url: "https://www.notion.so/Alpha-One-1e876d36cebb80558886c9b3972bbf74", desc: "精英中学月度模拟考试挑战" },
+            { title: "Z-Library", url: "https://z-library.sk", desc: "电子书下载网站" }
+          ]},
+          { title: "娱乐", items: [
+            { title: "图寻 - 探索世界", url: "https://tuxun.fun", desc: "探索世界的地图类娱乐网站" },
+            { title: "Polytrack", url: "https://polytrack.run", desc: "在线赛车与驾驶类游戏" }
+          ]},
+          { title: "大全", items: [
+            { title: "Books / Comics / Manga (FMHY)", url: "https://fmhy.net", desc: "电子书、漫画、轻小说等资源站合集" }
+          ]},
+          { title: "软件下载", items: [
+            { title: "VAAB App 下载站", url: "http://app.vaab.asia/pRTkrJf3PV", desc: "提供软件下载的资源站" },
+            { title: "P&SJ 文档资源", url: "https://docs.qq.com/doc/DWk5MTlBLSWxuSFRk", desc: "软件说明与下载文档" }
+          ]}
+        ]
+      },
+      en: {
+        title: "Shawn's Website Library",
+        categories: [
+          { title: "Tools", items: [
+            { title: "ScanQR", url: "https://scanqr.org", desc: "Online QR code generator and scanner" },
+            { title: "Z-Library", url: "https://z-library.sk", desc: "Ebook download site" },
+            { title: "FreeCompress", url: "https://freecompress.com", desc: "File compression tool" },
+            { title: "Documentary Heaven", url: "https://www.documentaryheaven.com", desc: "Watch documentaries online" },
+            { title: "Convertio", url: "https://convertio.co", desc: "File format converter" }
+          ]},
+          { title: "Editing / Music", items: [
+            { title: "ScanQR", url: "https://scanqr.org", desc: "Online QR code generator and scanner" },
+            { title: "SaveFrom.net", url: "https://zh.savefrom.net", desc: "Free video and music downloader" },
+            { title: "Free Music Archive", url: "https://freemusicarchive.org", desc: "Free, legal music library" },
+            { title: "Pixabay Music", url: "https://pixabay.com/music/", desc: "Royalty-free music downloads" }
+          ]},
+          { title: "Study", items: [
+            { title: "Alpha One Challenge", url: "https://www.notion.so/Alpha-One-1e876d36cebb80558886c9b3972bbf74", desc: "Monthly elite school exam challenge" },
+            { title: "Z-Library", url: "https://z-library.sk", desc: "Ebook download site" }
+          ]},
+          { title: "Entertainment", items: [
+            { title: "Tuxun - Explore World", url: "https://tuxun.fun", desc: "Map exploration entertainment site" },
+            { title: "Polytrack", url: "https://polytrack.run", desc: "Online racing and driving game" }
+          ]},
+          { title: "Collections", items: [
+            { title: "Books / Comics / Manga (FMHY)", url: "https://fmhy.net", desc: "Ebooks, manga, light novel resources" }
+          ]},
+          { title: "Software", items: [
+            { title: "VAAB App", url: "http://app.vaab.asia/pRTkrJf3PV", desc: "Software download resource" },
+            { title: "P&SJ Docs", url: "https://docs.qq.com/doc/DWk5MTlBLSWxuSFRk", desc: "Software guides and download docs" }
+          ]}
+        ]
+      }
+    };
+
+    let data = translations.zh; // 默认中文
 
     const STORED_HASH_HEX = "d303549d060022e41b62cef071b46e7c1745ce5bb224c7667acfacdf8becac8e";
     const STORAGE_KEY = "shawn_site_unlocked_v1";
@@ -158,8 +230,8 @@
       title.textContent = (open? "▸ " : "▾ ") + title.textContent.slice(2);
     }
 
-    function showOverlay(){ overlay.style.display = "flex"; pwdInput.value = ""; pwdError.textContent = ""; lockBtn.textContent = "🔒 Lock"; }
-    function hideOverlay(){ overlay.style.display = "none"; pwdError.textContent = ""; lockBtn.textContent = "🔓 Unlock"; }
+    function showOverlay(){ overlay.style.display = "flex"; lockBtn.textContent = "🔒 Lock"; }
+    function hideOverlay(){ overlay.style.display = "none"; lockBtn.textContent = "🔓 Unlock"; }
 
     async function tryUnlockWithInput(){
       const v = pwdInput.value.trim();
@@ -173,30 +245,4 @@
 
     function init(){
       buildUI();
-      toggleBtn.addEventListener("click", ()=>{ sidebar.classList.toggle("hidden"); });
-      lockBtn.addEventListener("click", ()=>{ localStorage.removeItem(STORAGE_KEY); showOverlay(); });
-      if(localStorage.getItem(STORAGE_KEY) === "true"){ hideOverlay(); } else { showOverlay(); }
-    }
-
-    // ===== 新增语言切换逻辑 =====
-    const btnZh = document.getElementById("btnZh");
-    const btnEn = document.getElementById("btnEn");
-    function setLanguage(lang){
-      if(lang==="zh"){
-        document.documentElement.lang = "zh-CN";
-        btnZh.classList.add("active"); btnEn.classList.remove("active");
-        document.querySelector("h1").textContent = "赵涵绍的网站库";
-      } else {
-        document.documentElement.lang = "en";
-        btnEn.classList.add("active"); btnZh.classList.remove("active");
-        document.querySelector("h1").textContent = "Shawn's Website Library";
-      }
-    }
-    btnZh.addEventListener("click", ()=> setLanguage("zh"));
-    btnEn.addEventListener("click", ()=> setLanguage("en"));
-    // ============================
-
-    init();
-  </script>
-</body>
-</html>
+      toggleBtn
