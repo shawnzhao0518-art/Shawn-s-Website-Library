@@ -5,40 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shawn's Website Library</title>
   <style>
-    body { margin:0; font-family: system-ui; display:flex; background:#111; color:#eee; }
-    header { padding:1rem; background:#222; color:#fff; font-weight:bold; }
-    /* 左边侧边栏 */
+    body { margin:0; font-family: system-ui; background:#111; color:#eee; }
+    header { padding:1rem; background:#222; color:#fff; font-weight:bold; display:flex; align-items:center; }
+    header button { margin-right:1rem; padding:.4rem .6rem; cursor:pointer; }
+
+    /* 布局 */
+    #container { display:flex; }
     #sidebar {
-      width: 220px; background:#1a1a1a; height:100vh; overflow:auto;
-      padding:1rem; box-sizing:border-box;
+      width:220px; background:#1a1a1a; height:100vh; overflow:auto;
+      padding:1rem; box-sizing:border-box; transition: transform 0.3s ease;
     }
+    #sidebar.hidden { transform: translateX(-100%); }
+    #main { flex:1; padding:1rem; }
+
+    /* 左边栏 */
     #sidebar h2 { font-size:1rem; margin:0.8rem 0; cursor:pointer; }
-    #sidebar ul { list-style:none; padding-left:1rem; display:none; }
+    #sidebar ul { list-style:none; padding-left:1rem; margin:0; display:none; }
     #sidebar li { margin:0.3rem 0; }
     #sidebar a { color:#4da3ff; text-decoration:none; font-size:.9rem; }
     #sidebar a:hover { text-decoration:underline; }
-    /* 右边主要内容 */
-    #main { flex:1; padding:1rem; }
+
+    /* 内容 */
     .item { margin-bottom:1rem; }
     .item a { font-weight:bold; color:#4da3ff; }
     .item p { margin:.2rem 0; color:#aaa; font-size:.9rem; }
   </style>
 </head>
 <body>
-  <!-- 左边栏 -->
-  <aside id="sidebar">
-    <header>Categories</header>
-    <nav id="nav"></nav>
-  </aside>
+  <header>
+    <button id="toggleBtn">☰</button>
+    Shawn's Website Library
+  </header>
 
-  <!-- 主体 -->
-  <main id="main">
-    <h1>Shawn's Website Library</h1>
-    <div id="content"></div>
-  </main>
+  <div id="container">
+    <!-- 左边栏 -->
+    <aside id="sidebar">
+      <nav id="nav"></nav>
+    </aside>
+
+    <!-- 主体 -->
+    <main id="main">
+      <div id="content"></div>
+    </main>
+  </div>
 
   <script>
-    // ★ 在这里填充你的分类和网站
+    // ★ 在这里填充分类和网站
     const data = {
       "categories": [
         {
@@ -54,13 +66,6 @@
             { "title": "Khan Academy", "url": "https://www.khanacademy.org/", "desc": "Free courses on math, science, coding." },
             { "title": "MIT OpenCourseWare", "url": "https://ocw.mit.edu/", "desc": "MIT free course materials." }
           ]
-        },
-        {
-          "title": "Entertainment",
-          "items": [
-            { "title": "YouTube", "url": "https://www.youtube.com/", "desc": "Video sharing platform." },
-            { "title": "Spotify", "url": "https://www.spotify.com/", "desc": "Music streaming." }
-          ]
         }
       ]
     };
@@ -71,7 +76,7 @@
     // 渲染左边栏
     data.categories.forEach(cat => {
       const h2 = document.createElement("h2");
-      h2.textContent = cat.title;
+      h2.textContent = "▸ " + cat.title;
       const ul = document.createElement("ul");
       cat.items.forEach(item => {
         const li = document.createElement("li");
@@ -82,7 +87,9 @@
         ul.appendChild(li);
       });
       h2.addEventListener("click", () => {
-        ul.style.display = ul.style.display==="block" ? "none" : "block";
+        const isOpen = ul.style.display === "block";
+        ul.style.display = isOpen ? "none" : "block";
+        h2.textContent = (isOpen ? "▸ " : "▾ ") + cat.title;
       });
       nav.appendChild(h2);
       nav.appendChild(ul);
@@ -102,6 +109,12 @@
         sec.appendChild(div);
       });
       content.appendChild(sec);
+    });
+
+    // 左边栏展开/收起
+    const sidebar = document.getElementById("sidebar");
+    document.getElementById("toggleBtn").addEventListener("click", () => {
+      sidebar.classList.toggle("hidden");
     });
   </script>
 </body>
