@@ -35,7 +35,7 @@
     }
 
     #container{display:flex;height:calc(100vh - 3.5rem);overflow:hidden}
-    #sidebar{width:16.25rem;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);padding:1rem;box-sizing:border-box;border-right:1px solid rgba(255,255,255,0.02);overflow:auto;transition:transform .28s ease;z-index:40;}
+    #sidebar{width:16.25rem;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);padding:1rem;box-sizing:border-box;border-right:1px solid rgba(255,255,255,0.02);overflow:auto;transition:transform .28s ease}
     #sidebar.hidden{transform:translateX(-100%)}
     #nav h2{margin:0;padding:0.5rem 0;cursor:pointer;display:flex;align-items:center;gap:0.5rem;font-size:1rem}
     #nav ul{list-style:none;padding-left:1rem;margin:0 0 1rem 0;display:none}
@@ -47,7 +47,6 @@
     .site-item:last-child{border-bottom:none}
     .site-item a{font-weight:600;color:var(--accent);text-decoration:none;font-size:1rem}
     .site-desc{color:var(--muted);margin:0.3rem 0;font-size:0.95rem}
-
     .overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);z-index:9999;}
     .modal{width:min(520px,92vw);background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:0.875rem;padding:1.2rem;border:1px solid rgba(255,255,255,0.04);box-shadow:0 0.5rem 2rem rgba(0,0,0,0.6);}
     .modal h2{margin:0 0 0.6rem 0;font-size:1.05rem}
@@ -56,23 +55,10 @@
     .modal input{flex:1;padding:0.6rem 0.7rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit;font-size:1rem}
     .modal .error{color:#ff7b7b;margin-top:0.5rem;font-size:0.95rem;min-height:1.1em}
     .modal .small{font-size:0.85rem;color:var(--muted);margin-top:0.6rem}
-
-    /* 遮罩层 */
-    .sidebar-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(2px);
-      z-index: 30;
-      display: none;
-    }
-    .sidebar-overlay.show { display: block; }
-
     @media (max-width:820px){
-      #sidebar{position:fixed;left:0;top:3.5rem;height:calc(100vh - 3.5rem);box-shadow:8px 0 20px rgba(0,0,0,0.6)}
+      #sidebar{position:fixed;left:0;top:3.5rem;height:calc(100vh - 3.5rem);z-index:40;box-shadow:8px 0 20px rgba(0,0,0,0.6)}
       #main{padding:0.8rem}
     }
-
     a { word-break: break-word; }
   </style>
 </head>
@@ -93,8 +79,6 @@
     <aside id="sidebar"><nav id="nav"></nav></aside>
     <main id="main"><div id="content"></div></main>
   </div>
-  <!-- 遮罩 -->
-  <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
   <div id="passwordOverlay" class="overlay" style="display:none" aria-hidden="false">
     <div class="modal">
@@ -111,7 +95,7 @@
 
   <script>
     /*********************************************************
-     * 六大板块数据（保持完整）
+     * 六大板块数据
      *********************************************************/
     const data = {
       "categories": [
@@ -176,7 +160,6 @@
     const nav = document.getElementById("nav");
     const content = document.getElementById("content");
     const pageTitle = document.getElementById("pageTitle");
-    const sidebarOverlay = document.getElementById("sidebarOverlay");
 
     const btnZh = document.getElementById("btnZh");
     const btnEn = document.getElementById("btnEn");
@@ -249,17 +232,13 @@
     pwdInput.addEventListener("keydown",(e)=>{ if(e.key==="Enter") tryUnlockWithInput(); });
 
     function init(){
-      toggleBtn.addEventListener("click",()=>{
-        sidebar.classList.toggle("hidden");
-        sidebarOverlay.classList.toggle("show");
-      });
-      sidebarOverlay.addEventListener("click",()=>{
-        sidebar.classList.add("hidden");
-        sidebarOverlay.classList.remove("show");
-      });
-
+      toggleBtn.addEventListener("click",()=>{ sidebar.classList.toggle("hidden"); });
       lockBtn.addEventListener("click",()=>{ localStorage.removeItem(STORAGE_KEY); showOverlay(); });
       const savedLang = localStorage.getItem("site_lang") || "en";
       setLang(savedLang);
-
-      // ✅ 在小屏幕默认隐藏 sidebar
+      if(localStorage.getItem(STORAGE_KEY)==="true"){ hideOverlay(); } else { showOverlay(); }
+    }
+    init();
+  </script>
+</body>
+</html>
