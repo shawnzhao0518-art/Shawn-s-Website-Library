@@ -242,7 +242,7 @@
       const v = pwdInput.value.trim();
       if(!v){ pwdError.textContent="请输入密码。"; return; }
       const h = await sha256Hex(v);
-      if(h===STORED_HASH_HEX){ localStorage.setItem(STORAGE_KEY,"true"); hideOverlay(); }
+      if(h===STORED_HASH_HEX){ localStorage.setItem(STORAGE_KEY,"true"); hideOverlay(); buildUI(); }
       else { pwdError.textContent="密码错误，请重试。"; }
     }
     pwdSubmit.addEventListener("click", tryUnlockWithInput);
@@ -262,4 +262,5 @@
       const savedLang = localStorage.getItem("site_lang") || "en";
       setLang(savedLang);
 
-      // ✅ 在小屏幕默认隐藏 sidebar
+      // ✅ 手机端默认隐藏侧栏
+      if(window.inner
