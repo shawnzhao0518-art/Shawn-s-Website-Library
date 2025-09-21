@@ -47,7 +47,7 @@
     .site-item a{font-weight:600;color:var(--accent);text-decoration:none;font-size:1rem}
     .site-desc{color:var(--muted);margin:0.3rem 0;font-size:0.95rem}
 
-    /* 平板 & 手机适配 */
+    /* 手机 & 平板适配 */
     @media (max-width: 1024px) {
       #sidebar {
         position: fixed;
@@ -87,16 +87,9 @@
     <main id="main"><div id="content"></div></main>
   </div>
 
-  <!-- 密码弹窗 -->
   <div id="passwordOverlay" class="overlay" style="display:none" aria-hidden="false">
     <div class="modal">
-      <div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;">
-        <h2 id="pwdTitle">请输入访问密码</h2>
-        <div class="lang-switch">
-          <button id="pwdBtnZh" class="lang-btn">中文</button>
-          <button id="pwdBtnEn" class="lang-btn">English</button>
-        </div>
-      </div>
+      <h2 id="pwdTitle">请输入访问密码</h2>
       <p id="pwdDesc">为保护此站内容，请输入密码以继续访问。</p>
       <div class="row">
         <input id="pwdInput" type="password" placeholder="输入密码" />
@@ -108,9 +101,7 @@
   </div>
 
   <script>
-    /*********************************************************
-     * 六大板块数据
-     *********************************************************/
+    /* 六大板块数据，保持完整 */
     const data = {
       "categories": [
         {
@@ -199,8 +190,6 @@
     const pageTitle = document.getElementById("pageTitle");
     const btnZh = document.getElementById("btnZh");
     const btnEn = document.getElementById("btnEn");
-    const pwdBtnZh = document.getElementById("pwdBtnZh");
-    const pwdBtnEn = document.getElementById("pwdBtnEn");
 
     let currentLang = "en";
 
@@ -248,8 +237,6 @@
       localStorage.setItem("site_lang", lang);
       btnZh.classList.toggle("active", lang==="zh");
       btnEn.classList.toggle("active", lang==="en");
-      pwdBtnZh.classList.toggle("active", lang==="zh");
-      pwdBtnEn.classList.toggle("active", lang==="en");
       pageTitle.textContent = lang==="zh"
         ? "Shawn's Website Library · 赵涵绍的网站库"
         : "Shawn's Website Library";
@@ -259,8 +246,6 @@
 
     btnZh.addEventListener("click", ()=> setLang("zh"));
     btnEn.addEventListener("click", ()=> setLang("en"));
-    pwdBtnZh.addEventListener("click", ()=> setLang("zh"));
-    pwdBtnEn.addEventListener("click", ()=> setLang("en"));
 
     async function sha256Hex(str){
       const enc = new TextEncoder().encode(String(str));
@@ -285,3 +270,11 @@
     function init(){
       toggleBtn.addEventListener("click",()=>{ sidebar.classList.toggle("show"); });
       lockBtn.addEventListener("click",()=>{ localStorage.removeItem(STORAGE_KEY); showOverlay(); });
+      const savedLang = localStorage.getItem("site_lang") || "en";
+      setLang(savedLang);
+      if(localStorage.getItem(STORAGE_KEY)==="true"){ hideOverlay(); } else { showOverlay(); }
+    }
+    init();
+  </script>
+</body>
+</html>
