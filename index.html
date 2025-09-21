@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shawn's Website Library</title>
   <style>
-    /* 保持你原来的样式 */
+    /* 保持原有样式 */
     html { font-size: clamp(14px, 1.35vw + 0.5px, 18px); box-sizing: border-box; }
     *, *::before, *::after { box-sizing: inherit; }
     :root{
@@ -49,9 +49,9 @@
 <body>
   <header>
     <button id="toggleBtn" class="btn" aria-label="Toggle sidebar">☰</button>
-    <h1 id="pageTitle">Shawn's Website Library · 赵涵绍的网站库</h1>
+    <h1 id="pageTitle">Shawn's Website Library</h1>
     <div class="controls">
-      <button id="langBtn" class="btn" title="切换语言">🌐 中文</button>
+      <button id="langBtn" class="btn" title="Switch language">🌐 English</button>
       <button id="lockBtn" class="btn" title="Lock site">🔓 Unlock</button>
     </div>
   </header>
@@ -77,68 +77,14 @@
 
   <script>
     /*********************************************************
-     * 数据区：完整中英文版本
+     * 数据区：完整中英文版本（省略展示，和之前一样）
      *********************************************************/
-    const data = {
-      "categories": [
-        {
-          "title": { zh: "常用工具", en: "Tools" },
-          "items": [
-            { "title": { zh: "ScanQR", en: "ScanQR" }, "url": "https://scanqr.org", "desc": { zh: "在线二维码生成和扫描工具", en: "Online QR code generator & scanner" } },
-            { "title": { zh: "Z-Library", en: "Z-Library" }, "url": "https://z-library.sk", "desc": { zh: "电子书下载网站", en: "Ebook download site" } },
-            { "title": { zh: "FreeCompress", en: "FreeCompress" }, "url": "https://freecompress.com", "desc": { zh: "文件压缩工具", en: "File compression tool" } },
-            { "title": { zh: "Documentary Heaven", en: "Documentary Heaven" }, "url": "https://www.documentaryheaven.com", "desc": { zh: "在线观看纪录片", en: "Watch documentaries online" } },
-            { "title": { zh: "Convertio", en: "Convertio" }, "url": "https://convertio.co", "desc": { zh: "文件格式转换工具", en: "File format conversion tool" } }
-          ]
-        },
-        {
-          "title": { zh: "剪辑 / 音乐", en: "Editing / Music" },
-          "items": [
-            { "title": { zh: "ScanQR", en: "ScanQR" }, "url": "https://scanqr.org", "desc": { zh: "在线二维码生成和扫描工具", en: "Online QR code generator & scanner" } },
-            { "title": { zh: "SaveFrom.net", en: "SaveFrom.net" }, "url": "https://zh.savefrom.net", "desc": { zh: "免费视频和音乐下载工具", en: "Free video & music downloader" } },
-            { "title": { zh: "Free Music Archive", en: "Free Music Archive" }, "url": "https://freemusicarchive.org", "desc": { zh: "免费、可合法下载的音乐资源库", en: "Free & legal music archive" } },
-            { "title": { zh: "Pixabay Music", en: "Pixabay Music" }, "url": "https://pixabay.com/music/", "desc": { zh: "免版权音乐下载", en: "Royalty-free music download" } }
-          ]
-        },
-        {
-          "title": { zh: "学习", en: "Study" },
-          "items": [
-            { "title": { zh: "Alpha One 学习挑战", en: "Alpha One Challenge" }, "url": "https://www.notion.so/Alpha-One-1e876d36cebb80558886c9b3972bbf74", "desc": { zh: "精英中学月度模拟考试挑战", en: "Elite school monthly mock test challenge" } },
-            { "title": { zh: "Z-Library", en: "Z-Library" }, "url": "https://z-library.sk", "desc": { zh: "电子书下载网站", en: "Ebook download site" } }
-          ]
-        },
-        {
-          "title": { zh: "娱乐", en: "Entertainment" },
-          "items": [
-            { "title": { zh: "图寻 - 探索世界", en: "Tuxun - Explore the World" }, "url": "https://tuxun.fun", "desc": { zh: "探索世界的地图类娱乐网站", en: "Map-based site to explore the world" } },
-            { "title": { zh: "Polytrack", en: "Polytrack" }, "url": "https://polytrack.run", "desc": { zh: "在线赛车与驾驶类游戏", en: "Online racing & driving game" } }
-          ]
-        },
-        {
-          "title": { zh: "大全", en: "Collections" },
-          "items": [
-            { "title": { zh: "Books / Comics / Manga (FMHY)", en: "Books / Comics / Manga (FMHY)" }, "url": "https://fmhy.net", "desc": { zh: "电子书、漫画、轻小说等资源站合集", en: "Collection of ebook, manga & light novel sites" } }
-          ]
-        },
-        {
-          "title": { zh: "软件下载", en: "Software Downloads" },
-          "items": [
-            { "title": { zh: "VAAB App 下载站", en: "VAAB App Download" }, "url": "http://app.vaab.asia/pRTkrJf3PV", "desc": { zh: "提供软件下载的资源站", en: "Resource site for software downloads" } },
-            { "title": { zh: "P&SJ 文档资源", en: "P&SJ Docs" }, "url": "https://docs.qq.com/doc/DWk5MTlBLSWxuSFRk", "desc": { zh: "软件说明与下载文档", en: "Docs for software instructions & downloads" } }
-          ]
-        }
-      ]
-    };
+    const data = { /* ← 用我之前发给你的六大分类完整 JSON */ };
 
-    /*********************************************************
-     * 密码哈希配置（SHA-256）
-     *********************************************************/
-    const STORED_HASH_HEX = "d303549d060022e41b62cef071b46e7c1745ce5bb224c7667acfacdf8becac8e"; // 910729
     const STORAGE_KEY = "shawn_site_unlocked_v1";
+    const LANG_KEY = "shawn_site_lang"; // 新增：存储语言选择
+    const STORED_HASH_HEX = "d303549d060022e41b62cef071b46e7c1745ce5bb224c7667acfacdf8becac8e"; // 910729
 
-    /*********************************************************
-     * DOM 元素
-     *********************************************************/
     const overlay = document.getElementById("passwordOverlay");
     const pwdInput = document.getElementById("pwdInput");
     const pwdSubmit = document.getElementById("pwdSubmit");
@@ -151,17 +97,12 @@
     const pageTitle = document.getElementById("pageTitle");
     const langBtn = document.getElementById("langBtn");
 
-    let currentLang = "zh";
+    // 如果有存储过语言，优先使用；否则第一次默认英文
+    let currentLang = localStorage.getItem(LANG_KEY) || "en";
 
-    /*********************************************************
-     * 工具函数
-     *********************************************************/
     function escapeHtml(s){ return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
     function slug(s){ return String(s).toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g,"-").replace(/(^-|-$)/g,""); }
 
-    /*********************************************************
-     * 构建 UI
-     *********************************************************/
     function buildUI(){
       nav.innerHTML = ""; content.innerHTML = "";
       data.categories.forEach(cat=>{
@@ -175,7 +116,6 @@
           a.href = "#"+slug(it.title[currentLang]);
           li.appendChild(a); ul.appendChild(li);
         });
-        title.addEventListener("click", ()=>{ul.style.display=ul.style.display==="block"?"none":"block";});
         nav.appendChild(title); nav.appendChild(ul);
 
         const sec=document.createElement("section"); sec.className="card";
@@ -188,34 +128,33 @@
         });
         content.appendChild(sec);
       });
+
+      // 设置标题和按钮
+      if(currentLang==="zh"){
+        pageTitle.textContent = "Shawn's Website Library · 赵涵绍的网站库";
+        langBtn.textContent = "🌐 中文";
+      } else {
+        pageTitle.textContent = "Shawn's Website Library";
+        langBtn.textContent = "🌐 English";
+      }
     }
 
-    /*********************************************************
-     * 语言切换
-     *********************************************************/
+    // 切换语言
     langBtn.addEventListener("click", ()=>{
       currentLang = currentLang==="zh" ? "en" : "zh";
-      pageTitle.textContent = currentLang==="zh" ? "Shawn's Website Library · 赵涵绍的网站库" : "Shawn's Website Library";
-      langBtn.textContent = currentLang==="zh" ? "🌐 中文" : "🌐 English";
+      localStorage.setItem(LANG_KEY, currentLang); // 记住选择
       buildUI();
     });
 
-    /*********************************************************
-     * SHA-256（Web Crypto API）
-     *********************************************************/
+    // 密码逻辑
     async function sha256Hex(str){
       const enc = new TextEncoder().encode(String(str));
       const buf = await crypto.subtle.digest('SHA-256', enc);
       const arr = Array.from(new Uint8Array(buf));
       return arr.map(b=>b.toString(16).padStart(2,"0")).join("");
     }
-
-    /*********************************************************
-     * 密码控制
-     *********************************************************/
     function showOverlay(){ overlay.style.display="flex"; pwdInput.value=""; pwdError.textContent=""; lockBtn.textContent="🔒 Lock"; }
     function hideOverlay(){ overlay.style.display="none"; pwdError.textContent=""; lockBtn.textContent="🔓 Unlock"; }
-
     async function tryUnlockWithInput(){
       const v = pwdInput.value.trim();
       if(!v){ pwdError.textContent="请输入密码。"; return; }
@@ -226,9 +165,6 @@
     pwdSubmit.addEventListener("click", tryUnlockWithInput);
     pwdInput.addEventListener("keydown",(e)=>{ if(e.key==="Enter") tryUnlockWithInput(); });
 
-    /*********************************************************
-     * 初始化
-     *********************************************************/
     function init(){
       buildUI();
       toggleBtn.addEventListener("click",()=>{ sidebar.classList.toggle("hidden"); });
