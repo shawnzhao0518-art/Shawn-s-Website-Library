@@ -111,7 +111,7 @@
 
   <script>
     /*********************************************************
-     * 六大板块数据（保持完整）
+     * 六大板块数据
      *********************************************************/
     const data = {
       "categories": [
@@ -259,8 +259,4 @@
       });
 
       lockBtn.addEventListener("click",()=>{ localStorage.removeItem(STORAGE_KEY); showOverlay(); });
-      const savedLang = localStorage.getItem("site_lang") || "en";
-      setLang(savedLang);
-
-      // ✅ 手机端默认隐藏侧栏
-      if(window.inner
+      const savedLang = localStorage.getItem("site_lang") ||
