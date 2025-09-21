@@ -111,10 +111,18 @@
       content.appendChild(sec);
     });
 
-    // 左边栏展开/收起
+    // 左边栏展开/收起 + 记忆功能
     const sidebar = document.getElementById("sidebar");
-    document.getElementById("toggleBtn").addEventListener("click", () => {
+    const toggleBtn = document.getElementById("toggleBtn");
+
+    // 初始化时检查 localStorage
+    if (localStorage.getItem("sidebarHidden") === "true") {
+      sidebar.classList.add("hidden");
+    }
+
+    toggleBtn.addEventListener("click", () => {
       sidebar.classList.toggle("hidden");
+      localStorage.setItem("sidebarHidden", sidebar.classList.contains("hidden"));
     });
   </script>
 </body>
