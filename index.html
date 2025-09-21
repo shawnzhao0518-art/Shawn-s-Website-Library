@@ -107,8 +107,58 @@
   </div>
 
   <script>
-    /* 六大板块数据（保留不变，这里省略展示） */
-    const data = { "categories": [ /* ... 你的 Tools, Music, Study, Entertainment, Collections, Downloads 全部数据 ... */ ] };
+    /*********************************************************
+     * 六大板块数据（完整）
+     *********************************************************/
+    const data = {
+      "categories": [
+        {
+          "title": { zh: "常用工具", en: "Tools" },
+          "items": [
+            { "title": { zh: "ScanQR", en: "ScanQR" }, "url": "https://scanqr.org", "desc": { zh: "在线二维码生成和扫描工具", en: "Online QR code generator & scanner" } },
+            { "title": { zh: "Z-Library", en: "Z-Library" }, "url": "https://z-library.sk", "desc": { zh: "电子书下载网站", en: "Ebook download site" } },
+            { "title": { zh: "FreeCompress", en: "FreeCompress" }, "url": "https://freecompress.com", "desc": { zh: "文件压缩工具", en: "File compression tool" } },
+            { "title": { zh: "Documentary Heaven", en: "Documentary Heaven" }, "url": "https://www.documentaryheaven.com", "desc": { zh: "在线观看纪录片", en: "Watch documentaries online" } },
+            { "title": { zh: "Convertio", en: "Convertio" }, "url": "https://convertio.co", "desc": { zh: "文件格式转换工具", en: "File format conversion tool" } }
+          ]
+        },
+        {
+          "title": { zh: "剪辑 / 音乐", en: "Editing / Music" },
+          "items": [
+            { "title": { zh: "SaveFrom.net", en: "SaveFrom.net" }, "url": "https://zh.savefrom.net", "desc": { zh: "免费视频和音乐下载工具", en: "Free video & music downloader" } },
+            { "title": { zh: "Free Music Archive", en: "Free Music Archive" }, "url": "https://freemusicarchive.org", "desc": { zh: "免费、可合法下载的音乐资源库", en: "Free & legal music archive" } },
+            { "title": { zh: "Pixabay Music", en: "Pixabay Music" }, "url": "https://pixabay.com/music/", "desc": { zh: "免版权音乐下载", en: "Royalty-free music download" } }
+          ]
+        },
+        {
+          "title": { zh: "学习", en: "Study" },
+          "items": [
+            { "title": { zh: "Alpha One 学习挑战", en: "Alpha One Challenge" }, "url": "https://www.notion.so/Alpha-One-1e876d36cebb80558886c9b3972bbf74", "desc": { zh: "精英中学月度模拟考试挑战", en: "Elite school monthly mock test challenge" } },
+            { "title": { zh: "Z-Library", en: "Z-Library" }, "url": "https://z-library.sk", "desc": { zh: "电子书下载网站", en: "Ebook download site" } }
+          ]
+        },
+        {
+          "title": { zh: "娱乐", en: "Entertainment" },
+          "items": [
+            { "title": { zh: "图寻 - 探索世界", en: "Tuxun - Explore the World" }, "url": "https://tuxun.fun", "desc": { zh: "探索世界的地图类娱乐网站", en: "Map-based site to explore the world" } },
+            { "title": { zh: "Polytrack", en: "Polytrack" }, "url": "https://polytrack.run", "desc": { zh: "在线赛车与驾驶类游戏", en: "Online racing & driving game" } }
+          ]
+        },
+        {
+          "title": { zh: "大全", en: "Collections" },
+          "items": [
+            { "title": { zh: "Books / Comics / Manga (FMHY)", en: "Books / Comics / Manga (FMHY)" }, "url": "https://fmhy.net", "desc": { zh: "电子书、漫画、轻小说等资源站合集", en: "Collection of ebook, manga & light novel sites" } }
+          ]
+        },
+        {
+          "title": { zh: "软件下载", en: "Software Downloads" },
+          "items": [
+            { "title": { zh: "VAAB App 下载站", en: "VAAB App Download" }, "url": "http://app.vaab.asia/pRTkrJf3PV", "desc": { zh: "提供软件下载的资源站", en: "Resource site for software downloads" } },
+            { "title": { zh: "P&SJ 文档资源", en: "P&SJ Docs" }, "url": "https://docs.qq.com/doc/DWk5MTlBLSWxuSFRk", "desc": { zh: "软件说明与下载文档", en: "Docs for software instructions & downloads" } }
+          ]
+        }
+      ]
+    };
 
     const STORED_HASH_HEX = "d303549d060022e41b62cef071b46e7c1745ce5bb224c7667acfacdf8becac8e"; // 910729
     const STORAGE_KEY = "shawn_site_unlocked_v1";
