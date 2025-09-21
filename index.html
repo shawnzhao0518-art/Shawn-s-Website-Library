@@ -7,40 +7,51 @@
     body {
       font-family: Arial, sans-serif;
       background:#111;
-      color:#fff;
+      color:#eee;
       margin:0;
       padding:2rem;
     }
-    h2 { margin-top:2rem; color:#0ff; }
+    h2 {
+      margin-top:2rem;
+      color:#4fc3f7;
+    }
     .site-item {
       display:flex;
+      justify-content:space-between; /* 左边文字，右边图标 */
       align-items:center;
-      gap:0.6rem;
       padding:0.6rem 0;
-      border-bottom:1px dashed rgba(255,255,255,0.1);
+      border-bottom:1px dashed rgba(255,255,255,0.05);
+    }
+    .site-text {
+      display:flex;
+      flex-direction:column;
     }
     .site-item a {
       font-weight:600;
-      color:#0ff;
+      color:#fff;
       text-decoration:none;
       font-size:1rem;
-      flex:1;
+    }
+    .site-desc {
+      color:#aaa;
+      font-size:0.9rem;
     }
     .site-item img {
-      height:28px;
+      height:24px;
       width:auto;
       border-radius:4px;
       cursor:pointer;
       transition: transform 0.2s;
     }
-    .site-item img:hover { transform: scale(1.1); }
-
+    .site-item img:hover {
+      transform: scale(1.1);
+    }
     /* 放大预览层 */
     #imgOverlay {
       position:fixed; inset:0;
       background:rgba(0,0,0,0.7);
       display:none; align-items:center; justify-content:center;
-      z-index:9999;
+      z-index:99999;
     }
     #imgOverlay img {
       max-width:90vw; max-height:90vh;
@@ -50,54 +61,125 @@
   </style>
 </head>
 <body>
+
   <h1>Shawn 的网站库</h1>
 
   <h2>常用工具</h2>
-  <div class="site-item"><a href="#">ScanQR</a><img src="https://i.imgur.com/QXA69Nk.jpeg"></div>
-  <div class="site-item"><a href="#">Z-Library</a><img src="https://i.imgur.com/kgzK9sh.jpeg"></div>
-  <div class="site-item"><a href="#">FreeCompress</a><img src="https://i.imgur.com/YMCaYJC.jpeg"></div>
-  <div class="site-item"><a href="#">DocumentaryHeaven</a><img src="https://i.imgur.com/6x6yzVZ.jpeg"></div>
-  <div class="site-item"><a href="#">Convertio</a><img src="https://i.imgur.com/OzpS2zQ.jpeg"></div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">ScanQR</a>
+      <div class="site-desc">二维码生成器</div>
+    </div>
+    <img src="https://i.imgur.com/QXA69Nk.jpeg" alt="ScanQR">
+  </div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">Z-Library</a>
+      <div class="site-desc">电子书下载</div>
+    </div>
+    <img src="https://i.imgur.com/kgzK9sh.jpeg" alt="Z-Library">
+  </div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">FreeCompress</a>
+      <div class="site-desc">文件压缩工具</div>
+    </div>
+    <img src="https://i.imgur.com/YMCaYJC.jpeg" alt="FreeCompress">
+  </div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">DocumentaryHeaven</a>
+      <div class="site-desc">纪录片资源</div>
+    </div>
+    <img src="https://i.imgur.com/6x6yzVZ.jpeg" alt="DocumentaryHeaven">
+  </div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">Convertio</a>
+      <div class="site-desc">文件格式转换</div>
+    </div>
+    <img src="https://i.imgur.com/OzpS2zQ.jpeg" alt="Convertio">
+  </div>
 
   <h2>剪辑 / 音乐</h2>
-  <div class="site-item"><a href="#">ScanQR</a><img src="https://i.imgur.com/QXA69Nk.jpeg"></div>
-  <div class="site-item"><a href="#">SaveFrom</a><img src="https://i.imgur.com/uKbmpVh.jpeg"></div>
-  <div class="site-item"><a href="#">FMA</a><img src="https://i.imgur.com/MiIGwAc.jpeg"></div>
-  <div class="site-item"><a href="#">Pixabay</a><img src="https://i.imgur.com/TOZJXNv.jpeg"></div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">SaveFrom</a>
+      <div class="site-desc">YouTube 视频下载</div>
+    </div>
+    <img src="https://i.imgur.com/uKbmpVh.jpeg" alt="SaveFrom">
+  </div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">FMA</a>
+      <div class="site-desc">Free Music Archive</div>
+    </div>
+    <img src="https://i.imgur.com/MiIGwAc.jpeg" alt="FMA">
+  </div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">Pixabay</a>
+      <div class="site-desc">免版权音乐</div>
+    </div>
+    <img src="https://i.imgur.com/TOZJXNv.jpeg" alt="Pixabay">
+  </div>
 
   <h2>学习</h2>
-  <div class="site-item"><a href="#">Alpha One</a><img src="https://i.imgur.com/3yLGWFy.jpeg"></div>
-  <div class="site-item"><a href="#">Z-Library</a><img src="https://i.imgur.com/kgzK9sh.jpeg"></div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">Alpha One</a>
+      <div class="site-desc">学习资源</div>
+    </div>
+    <img src="https://i.imgur.com/3yLGWFy.jpeg" alt="Alpha One">
+  </div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">Z-Library</a>
+      <div class="site-desc">电子书下载</div>
+    </div>
+    <img src="https://i.imgur.com/kgzK9sh.jpeg" alt="Z-Library">
+  </div>
 
   <h2>娱乐</h2>
-  <div class="site-item"><a href="#">图寻</a><img src="https://i.imgur.com/atB5iZQ.jpeg"></div>
-  <div class="site-item"><a href="#">Polytrack</a><img src="https://i.imgur.com/BBvuMAT.jpeg"></div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">图寻</a>
+      <div class="site-desc">探索世界</div>
+    </div>
+    <img src="https://i.imgur.com/atB5iZQ.jpeg" alt="图寻">
+  </div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">Polytrack</a>
+      <div class="site-desc">在线游戏</div>
+    </div>
+    <img src="https://i.imgur.com/BBvuMAT.jpeg" alt="Polytrack">
+  </div>
 
   <h2>大全</h2>
-  <div class="site-item"><a href="#">FMHY</a><img src="https://i.imgur.com/4qHDS15.jpeg"></div>
+  <div class="site-item">
+    <div class="site-text">
+      <a href="#">FMHY</a>
+      <div class="site-desc">资源大全</div>
+    </div>
+    <img src="https://i.imgur.com/4qHDS15.jpeg" alt="FMHY">
+  </div>
 
-  <!-- 放大预览 -->
+  <!-- 放大预览层 -->
   <div id="imgOverlay"><img src="" alt="Preview"></div>
 
   <script>
     const overlay = document.getElementById("imgOverlay");
-    const overlayImg = overlay.querySelector("img");
-
     document.querySelectorAll(".site-item img").forEach(img=>{
       img.addEventListener("click", ()=>{
         overlay.style.display = "flex";
-        overlayImg.src = img.src;
+        overlay.querySelector("img").src = img.src;
       });
     });
-
     overlay.addEventListener("click", ()=>{
       overlay.style.display = "none";
-      overlayImg.src = "";
-    });
-
-    window.addEventListener("keydown", e=>{
-      if(e.key==="Escape") overlay.click();
     });
   </script>
+
 </body>
 </html>
