@@ -39,15 +39,8 @@
       color:#4fc3f7;
     }
     .site-item {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
       padding:0.6rem 0;
       border-bottom:1px dashed rgba(255,255,255,0.05);
-    }
-    .site-text {
-      display:flex;
-      flex-direction:column;
     }
     .site-item a {
       font-weight:600;
@@ -58,28 +51,6 @@
     .site-desc {
       color:#aaa;
       font-size:0.9rem;
-    }
-    .site-item img {
-      height:24px;
-      width:auto;
-      border-radius:4px;
-      cursor:pointer;
-      transition: transform 0.2s;
-    }
-    .site-item img:hover {
-      transform: scale(1.1);
-    }
-    /* 放大预览层 */
-    #imgOverlay {
-      position:fixed; inset:0;
-      background:rgba(0,0,0,0.7);
-      display:none; align-items:center; justify-content:center;
-      z-index:99999;
-    }
-    #imgOverlay img {
-      max-width:90vw; max-height:90vh;
-      border-radius:10px;
-      box-shadow:0 0 20px rgba(0,0,0,0.6);
     }
   </style>
 </head>
@@ -92,100 +63,61 @@
 
   <h2 data-zh="常用工具" data-en="Tools">常用工具</h2>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="ScanQR" data-en="ScanQR">ScanQR</a>
-      <div class="site-desc" data-zh="二维码生成器" data-en="QR Code Generator">二维码生成器</div>
-    </div>
-    <img src="https://i.imgur.com/QXA69Nk.jpeg" alt="ScanQR">
+    <a href="#" data-zh="ScanQR" data-en="ScanQR">ScanQR</a>
+    <div class="site-desc" data-zh="二维码生成器" data-en="QR Code Generator">二维码生成器</div>
   </div>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="Z-Library" data-en="Z-Library">Z-Library</a>
-      <div class="site-desc" data-zh="电子书下载" data-en="E-book Library">电子书下载</div>
-    </div>
-    <img src="https://i.imgur.com/kgzK9sh.jpeg" alt="Z-Library">
+    <a href="#" data-zh="Z-Library" data-en="Z-Library">Z-Library</a>
+    <div class="site-desc" data-zh="电子书下载" data-en="E-book Library">电子书下载</div>
   </div>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="FreeCompress" data-en="FreeCompress">FreeCompress</a>
-      <div class="site-desc" data-zh="文件压缩工具" data-en="File Compression">文件压缩工具</div>
-    </div>
-    <img src="https://i.imgur.com/YMCaYJC.jpeg" alt="FreeCompress">
+    <a href="#" data-zh="FreeCompress" data-en="FreeCompress">FreeCompress</a>
+    <div class="site-desc" data-zh="文件压缩工具" data-en="File Compression">文件压缩工具</div>
   </div>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="DocumentaryHeaven" data-en="DocumentaryHeaven">DocumentaryHeaven</a>
-      <div class="site-desc" data-zh="纪录片资源" data-en="Documentary Resources">纪录片资源</div>
-    </div>
-    <img src="https://i.imgur.com/6x6yzVZ.jpeg" alt="DocumentaryHeaven">
+    <a href="#" data-zh="DocumentaryHeaven" data-en="DocumentaryHeaven">DocumentaryHeaven</a>
+    <div class="site-desc" data-zh="纪录片资源" data-en="Documentary Resources">纪录片资源</div>
   </div>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="Convertio" data-en="Convertio">Convertio</a>
-      <div class="site-desc" data-zh="文件格式转换" data-en="File Converter">文件格式转换</div>
-    </div>
-    <img src="https://i.imgur.com/OzpS2zQ.jpeg" alt="Convertio">
+    <a href="#" data-zh="Convertio" data-en="Convertio">Convertio</a>
+    <div class="site-desc" data-zh="文件格式转换" data-en="File Converter">文件格式转换</div>
   </div>
 
   <h2 data-zh="剪辑 / 音乐" data-en="Editing / Music">剪辑 / 音乐</h2>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="SaveFrom" data-en="SaveFrom">SaveFrom</a>
-      <div class="site-desc" data-zh="YouTube 视频下载" data-en="YouTube Downloader">YouTube 视频下载</div>
-    </div>
-    <img src="https://i.imgur.com/uKbmpVh.jpeg" alt="SaveFrom">
+    <a href="#" data-zh="SaveFrom" data-en="SaveFrom">SaveFrom</a>
+    <div class="site-desc" data-zh="YouTube 视频下载" data-en="YouTube Downloader">YouTube 视频下载</div>
   </div>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="FMA" data-en="FMA">FMA</a>
-      <div class="site-desc" data-zh="Free Music Archive" data-en="Free Music Archive">Free Music Archive</div>
-    </div>
-    <img src="https://i.imgur.com/MiIGwAc.jpeg" alt="FMA">
+    <a href="#" data-zh="FMA" data-en="FMA">FMA</a>
+    <div class="site-desc" data-zh="Free Music Archive" data-en="Free Music Archive">Free Music Archive</div>
   </div>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="Pixabay" data-en="Pixabay">Pixabay</a>
-      <div class="site-desc" data-zh="免版权音乐" data-en="Royalty-free Music">免版权音乐</div>
-    </div>
-    <img src="https://i.imgur.com/TOZJXNv.jpeg" alt="Pixabay">
+    <a href="#" data-zh="Pixabay" data-en="Pixabay">Pixabay</a>
+    <div class="site-desc" data-zh="免版权音乐" data-en="Royalty-free Music">免版权音乐</div>
   </div>
 
   <h2 data-zh="学习" data-en="Learning">学习</h2>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="Alpha One" data-en="Alpha One">Alpha One</a>
-      <div class="site-desc" data-zh="学习资源" data-en="Learning Resources">学习资源</div>
-    </div>
-    <img src="https://i.imgur.com/3yLGWFy.jpeg" alt="Alpha One">
+    <a href="#" data-zh="Alpha One" data-en="Alpha One">Alpha One</a>
+    <div class="site-desc" data-zh="学习资源" data-en="Learning Resources">学习资源</div>
   </div>
 
   <h2 data-zh="娱乐" data-en="Entertainment">娱乐</h2>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="图寻" data-en="Tuxun">图寻</a>
-      <div class="site-desc" data-zh="探索世界" data-en="Explore the World">探索世界</div>
-    </div>
-    <img src="https://i.imgur.com/atB5iZQ.jpeg" alt="图寻">
+    <a href="#" data-zh="图寻" data-en="Tuxun">图寻</a>
+    <div class="site-desc" data-zh="探索世界" data-en="Explore the World">探索世界</div>
   </div>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="Polytrack" data-en="Polytrack">Polytrack</a>
-      <div class="site-desc" data-zh="在线游戏" data-en="Online Game">在线游戏</div>
-    </div>
-    <img src="https://i.imgur.com/BBvuMAT.jpeg" alt="Polytrack">
+    <a href="#" data-zh="Polytrack" data-en="Polytrack">Polytrack</a>
+    <div class="site-desc" data-zh="在线游戏" data-en="Online Game">在线游戏</div>
   </div>
 
   <h2 data-zh="大全" data-en="Collections">大全</h2>
   <div class="site-item">
-    <div class="site-text">
-      <a href="#" data-zh="FMHY" data-en="FMHY">FMHY</a>
-      <div class="site-desc" data-zh="资源大全" data-en="Resources Collection">资源大全</div>
-    </div>
-    <img src="https://i.imgur.com/4qHDS15.jpeg" alt="FMHY">
+    <a href="#" data-zh="FMHY" data-en="FMHY">FMHY</a>
+    <div class="site-desc" data-zh="资源大全" data-en="Resources Collection">资源大全</div>
   </div>
-
-  <!-- 放大预览层 -->
-  <div id="imgOverlay"><img src="" alt="Preview"></div>
 
   <script>
     // 语言切换
@@ -198,18 +130,6 @@
       document.querySelectorAll("[data-zh]").forEach(el => {
         el.textContent = el.getAttribute("data-" + currentLang);
       });
-    });
-
-    // 图片预览
-    const overlay = document.getElementById("imgOverlay");
-    document.querySelectorAll(".site-item img").forEach(img=>{
-      img.addEventListener("click", ()=>{
-        overlay.style.display = "flex";
-        overlay.querySelector("img").src = img.src;
-      });
-    });
-    overlay.addEventListener("click", ()=>{
-      overlay.style.display = "none";
     });
   </script>
 
